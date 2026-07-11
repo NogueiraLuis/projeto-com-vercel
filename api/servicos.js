@@ -8,6 +8,7 @@ export default function handler(req, res) {
     { id: 1, nome: "Corte de Cabelo Clássico", preco: "R$ 45,00" },
     { id: 2, nome: "Barba Completa com Toalha Quente", preco: "R$ 35,00" },
     { id: 3, nome: "Combo Premium (Cabelo + Barba)", preco: "R$ 70,00" },
+    { id: 4, nome: "Tratamento Capilar Profundo", preco: "R$ 60,00" },
   ];
 
   // A Vercel cuida do envio dos cabeçalhos de resposta automaticamente
