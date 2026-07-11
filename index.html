@@ -1,15 +1,31 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Digital</title>
     <link rel="stylesheet" href="style.css">
-    <title>first project</title>
 </head>
 <body>
-    <header>
-        <h1>My First commit</h1>
-    </header>
-    
+    <main class="container">
+        <h1>Nosso Cardápio de Serviços</h1>
+        <div id="lista-servicos">Carregando serviços...</div>
+
+        <hr>
+
+        <h2>Deixe sua Avaliação</h2>
+        <form id="form-feedback">
+            <input type="text" id="nome-cliente" placeholder="Seu Nome" required>
+            <select id="nota-cliente">
+                <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
+                <option value="4">⭐⭐⭐⭐ (4/5)</option>
+                <option value="3">⭐⭐⭐ (3/5)</option>
+            </select>
+            <textarea id="texto-comentario" placeholder="O que achou do serviço?"></textarea>
+            <button type="submit">Enviar Avaliação</button>
+        </form>
+    </main>
+
+    <script src="app.js"></script>
 </body>
 </html>
