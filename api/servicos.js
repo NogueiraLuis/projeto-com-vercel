@@ -1,22 +1,39 @@
-export default function handler(req, res) {
-  // Garantir que só aceitamos requisições do tipo GET
-  if (req.method !== "GET") {
-    return res.status(405).json({ erro: "Método não permitido" });
+import { sql } from '@vercel/postgres';
+
+export default async function handler(request, response) {
+  if (request.method !== 'GET') {
+    return response.status(405).json({ erro: 'Método não permitido' });
   }
 
-  const listagem = [
-    { id: 1, nome: "Corte de Cabelo Clássico", preco: "R$ 45,00" },
-    { id: 2, nome: "Barba Completa com Toalha Quente", preco: "R$ 35,00" },
-    { id: 3, nome: "Combo Premium (Cabelo + Barba)", preco: "R$ 70,00" },
-    { id: 4, nome: "Tratamento Capilar Profundo", preco: "R$ 60,00" },
-    { id: 5, nome: "Hidratação Profunda", preco: "R$ 50,00" },
-    { id: 6, nome: "Coloração e Tonalização", preco: "R$ 80,00" },
-    { id: 7, nome: "Design de Sobrancelhas", preco: "R$ 25,00" },
-    { id: 8, nome: "Depilação Facial", preco: "R$ 30,00" },
-    { id: 9, nome: "Massagem Relaxante", preco: "R$ 90,00" },
-    { id: 10, nome: "Pacote de Noivado (Cabelo + Barba + Massagem)", preco: "R$ 150,00" },
-  ];
+  try {
+    // 1. Cria a tabela de serviços se ela ainda não existir
+    await sql`
+      CREATE TABLE IF NOT EXISTS servicos (
+        id SERIAL PRIMARY KEY,
+        nome VARCHAR(255) NOT NULL,
+        preco VARCHAR(100) NOT NULL
+      );
+    `;
 
-  // A Vercel cuida do envio dos cabeçalhos de resposta automaticamente
-  return res.status(200).json(listagem);
+    // 2. Procura os serviços no banco
+    let { rows: listaServicos } = await sql`SELECT * FROM servicos ORDER BY id ASC;`;
+    
+    // 3. Se o banco estiver totalmente vazio, insere os dados iniciais automaticamente
+    if (listaServicos.length === 0) {
+      await sql`
+        INSERT INTO servicos (nome, preco) VALUES 
+        ('Corte de Cabelo Clássico', 'R$ 45,00'),
+        ('Barba Completa com Toalha Quente', 'R$ 35,00'),
+        ('Combo Premium (Cabelo + Barba)', 'R$ 70,00');
+      `;
+      // Procura novamente após inserir os dados iniciais
+      const resultado = await sql`SELECT * FROM servicos ORDER BY id ASC;`;
+      listaServicos = resultado.rows;
+    }
+
+    // 4. Devolve os dados reais do banco
+    return response.status(200).json(listaServicos);
+  } catch (error) {
+    return response.status(500).json({ erro: error.message });
+  }
 }
