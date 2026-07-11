@@ -3,28 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo Digital</title>
+    <meta name="theme-color" content="#141210">
+    <meta name="description" content="Barbearia premium — cortes clássicos, barba com toalha quente e combos exclusivos. Agende seu horário.">
+    <title>Barbearia Premium — Catálogo de Serviços</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main class="container">
-        <h1>Nosso Cardápio de Serviços</h1>
-        <div id="lista-servicos">Carregando serviços...</div>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="#" class="brand">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="6" cy="6" r="3"></circle>
+                        <circle cx="6" cy="18" r="3"></circle>
+                        <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                        <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                        <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+                    </svg>
+                </span>
+                <span class="brand-name">Barbearia<strong>Premium</strong></span>
+            </a>
+            <nav class="site-nav" aria-label="Navegação principal">
+                <a href="#servicos">Serviços</a>
+                <a href="#avaliacao">Avaliação</a>
+            </nav>
+        </div>
+    </header>
 
-        <hr>
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <p class="eyebrow">Estilo &amp; Tradição desde sempre</p>
+                <h1 id="hero-title">O corte certo faz toda a diferença</h1>
+                <p class="hero-sub">Serviços profissionais de barbearia com atendimento premium. Escolha seu serviço e agende sua experiência.</p>
+                <a href="#servicos" class="btn btn-primary">Ver serviços</a>
+            </div>
+        </section>
 
-        <h2>Deixe sua Avaliação</h2>
-        <form id="form-feedback">
-            <input type="text" id="nome-cliente" placeholder="Seu Nome" required>
-            <select id="nota-cliente">
-                <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
-                <option value="4">⭐⭐⭐⭐ (4/5)</option>
-                <option value="3">⭐⭐⭐ (3/5)</option>
-            </select>
-            <textarea id="texto-comentario" placeholder="O que achou do serviço?"></textarea>
-            <button type="submit">Enviar Avaliação</button>
-        </form>
+        <section id="servicos" class="section" aria-labelledby="servicos-title">
+            <div class="container">
+                <div class="section-head">
+                    <p class="eyebrow">Nosso cardápio</p>
+                    <h2 id="servicos-title">Serviços &amp; Preços</h2>
+                    <p class="section-desc">Trabalho artesanal, produtos de qualidade e acabamento impecável em cada detalhe.</p>
+                </div>
+                <div id="lista-servicos" class="grid-servicos" aria-live="polite">
+                    <div class="estado-carregando">Carregando serviços...</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="avaliacao" class="section section-alt" aria-labelledby="avaliacao-title">
+            <div class="container container-narrow">
+                <div class="section-head">
+                    <p class="eyebrow">Sua opinião importa</p>
+                    <h2 id="avaliacao-title">Deixe sua avaliação</h2>
+                    <p class="section-desc">Conte como foi sua experiência. Seu feedback nos ajuda a melhorar sempre.</p>
+                </div>
+                <form id="form-feedback" class="card-form" novalidate>
+                    <div class="campo">
+                        <label for="nome-cliente">Seu nome</label>
+                        <input type="text" id="nome-cliente" placeholder="Ex: João Silva" required>
+                    </div>
+                    <div class="campo">
+                        <label for="nota-cliente">Sua nota</label>
+                        <select id="nota-cliente">
+                            <option value="5">★★★★★ — Excelente (5/5)</option>
+                            <option value="4">★★★★ — Muito bom (4/5)</option>
+                            <option value="3">★★★ — Bom (3/5)</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="texto-comentario">Comentário</label>
+                        <textarea id="texto-comentario" rows="4" placeholder="O que você achou do serviço?"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Enviar avaliação</button>
+                    <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
     </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <span class="brand-name">Barbearia<strong>Premium</strong></span>
+            <p>&copy; <span id="ano"></span> Barbearia Premium. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
     <script src="app.js"></script>
 </body>
